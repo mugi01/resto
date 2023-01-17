@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>niceresto.com</title>
+	<!------------- Link CDN ----------->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+	<style>
+		
+	:root{
+		--favclr: #f9004d;
+		--black: #222;
+		--light-black: #666;	
+		--light-white: #ccc;
+		--light-bg: #f5f5f5;
+		--dark-bg: rgba(0, 0, 0, .7);
+		--border: .1rem solid #aaa;
+		--box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+	}
+	*{
+		font-family: 'dosis' sans-serif;
+		margin: 0; padding: 0;
+		box-sizing: border-box;
+		outline: none; border: none;
+		text-decoration: none;
+		transition: all 0.4s cubic-beizer(
+		.43,1.1,.62,1.08);
+		text-transform: capitalize;
+	}	
+	* > img{
+		user-select: none;
+		pointer-events: none;
+	}
+	html{
+		font-size: 62.5%;
+		overflow-x: hidden;
+		scroll-behavior: smooth;
+		scroll-padding-top: 6rem;
+	}
+	html::-webkit-scrollbar{
+		width: 1rem;
+	}
+	html::-webkit-scrollbar-track{
+		background-color: white;
+	}
+	html::-webkit-scrollbar-thumb{
+		background-color: tomato;
+	}
+	section{
+		padding: 5rem 10%;
+	}
+	.heading{
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+	.heading span{
+		font-size: 2.5rem;
+		color: var(--favclr);
+	}
+	.heading h3{
+		font-size: 4.5rem;
+		color: var(--black);
+	}
+	.btn{
+		margin-top: 1rem;
+		display: inline-block;
+		background: var(--favclr);
+		color: white;
+		font-size: 2rem;
+		cursor: pointer;
+		padding: 1rem 3rem;
+		border-radius: 1rem;
+	}
+	.btn:hover{
+		background: var(--black);
+		border: 3px solid var(--favclr);
+	}
+	.header{
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		box-shadow: var(--box-shadow);
+		position: sticky;
+		top: 0; left: 0; right: 0;
+		background: white;
+		z-index: 1000;
+	}
+	.header .logo{
+		font-size: 2.5rem;
+		font-weight: bolder;
+		color: var(--light-black);
+	}
+	.header .logo span{
+		color: var(--favclr);
+	}
+	.header .logo i{
+		color: var(--light-white);
+		padding-right: .5rem;
+	}
+	.header .navbar a{
+		color: var(--light-black);
+		margin-left: 2rem;
+		font-size: 2rem;
+	}
+	.header .navbar a.active,
+	.header .navbar a:hover{
+		color: var(--favclr);
+		border-bottom: 0.3rem solid var(--favclr);
+	}
+	.header .icons a,
+	.header .icons i{
+		cursor: pointer;
+		margin-left: .5rem;
+		height: 4.5rem;
+		line-height: 4.5rem;
+		width: 4.5rem;
+		text-align: center;
+		font-size: 1.7rem;
+		color: var(--black);
+		border-radius: 50%;
+		background: #eee;
+	}
+	.header .icons a:hover,
+	.header .icons i:hover{
+		color: white;
+		background: var(--favclr);
+		transform: rotate(360deg);
+	}
+
+	.header .icons #menu-bars{
+		display: none;
+	}
+
+	#search-form{
+			position: fixed;
+			top: -110%; left: 0;
+			height: 100%; width: 100%;
+			z-index: 1004;
+			background: rgba(0, 0, 0, .8);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0 1rem;
+		}
+		#search-form.active{
+			top: 0;
+		}
+		#search-form #search-box{
+			width: 50rem;
+			border-bottom: .1rem solid white;
+			padding: 1rem 0;
+			color: white;
+			font-size: 3rem;
+			text-transform: none;
+			background: none;
+		}
+		#search-form #search-box::placeholder{
+			color: #eee;
+		}
+		#search-form #search-box::-webkit-search-cancel-button{
+			-webkit-appearance: none;
+		}
+		#search-form label{
+			color: white;
+			cursor: pointer;
+			font-size: 3rem;
+		}
+		#search-form label:hover{
+			color: var(--green);
+		}
+		#search-form #close{
+			position: absolute;
+			color: white;
+			cursor: pointer;
+			top: 2rem; right: 3rem;
+			font-size: 5rem;
+		}
+
+
+		@keyframes fadeIn{
+			0%{
+				transform: translateY(.4rem) scale(0);
+				opacity: 0;
+			}
+		}
+		.home{
+			padding: 0;
+			background: var(--black);
+		}
+		.home .slide{
+			min-height: 100vh;
+			background-size: cover !important;
+			background-position: center !important;
+			position: relative;
+			z-index: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.home .slide::before{
+			content: '';
+			position: absolute;
+			top: 0; left: 0;
+			height: 100%; width: 100%;
+			background: var(--dark-bg);
+			z-index: -1;
+		}
+		.home .slide .content{
+			text-align: center;
+			width: 70rem;
+		}
+		.home .slide .content span{
+			font-size: 3rem;
+			display: block;
+			padding-bottom: .5rem;
+			color: white;
+			animation: fadeIn 0.4s cubic-bezier(.54, 1.3, .63, 1.34) .2s backwards;
+		}
+		.home .slide .content h3{
+			font-size: 8vw;
+			color: var(--light-white);
+			font-family: Times New Roman;
+			text-transform: uppercase;
+			text-shadow: 0 .5rem 1rem rgba(0, 0, 0, .7);
+			line-height: 1;
+			padding: 2rem 0;
+			animation: fadeIn 0.4s cubic-bezier(.54, 1.3, .63, 1.34) .4s backwards;
+		}
+		.home .slide .content .btn{
+			animation: fadeIn 0.4s cubic-bezier(.54, 1.3, .63, 1.34) .6s backwards;
+		}
+		.swiper-pagination-bullet-active{
+			background: var(--favclr);
+		}
+
+
+		.about{
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 2rem;
+		}
+		.about .image{
+			flex: 1 1 41rem;
+		}
+		.about .image img{
+			width: 100%;
+		}
+		.about .content{
+			flex: 1 1 41rem;
+		}
+		.about .content .title{
+			font-size: 4rem;
+			color: var(--black);
+		}
+		.about .content p{
+			font-size: 1.7rem;
+			color: var(--light-black);
+			padding: 1rem 0;
+			line-height: 2;
+		}
+		.about .content .icons-container{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+		.about .content .icons-container .icons{
+			flex: 1 1 1rem;
+			text-align: center;
+			background: var(--light-bg);
+			padding: 3rem 2rem;
+		}
+		.about .content .icons-container .icons img{
+			height: 5rem;
+		}
+		.about .content .icons-container .icons h3{
+			padding-top: 1rem;
+			font-size: 2rem;
+			color: var(--light-black);
+			font-weight: normal;
+		}
+
+		.food{
+			background: var(--light-bg);
+		}
+		.food .slide{
+			text-align: center;
+			padding: 4rem 2rem;
+			transform: scale(.9);
+			opacity: .5;
+			margin-bottom: 4rem;
+			cursor: pointer;
+		}
+		.food .swiper-slide-active{
+			transform: scale(1);
+			opacity: 1;
+			background: white;
+			box-shadow: var(--box-shadow);
+			border: var(--border);
+		}
+		.food .slide img{
+			height: 25rem;
+			margin-bottom: 1rem;
+		}
+		.food .slide h3{
+			font-size: 2.5rem;
+			padding: 1rem 0;
+			color: var(--black);
+		}
+		.food .slide .price{
+			font-size: 2.5rem;
+			color: var(--favclr);
+		}
+
+
+		.food .slide .fa-heart,
+		.food .slide .fa-shopping-cart{
+			position: absolute;
+			top: 1.5rem;
+			background: #eee;
+			border-radius: 50%;
+			height: 5rem;
+			width: 5rem;
+			line-height: 5rem;
+			font-size: 2rem;
+			color: var(--black);
+		}
+		.food .slide .fa-heart:hover,
+		.food .slide .fa-shopping-cart:hover{
+			background: var(--favclr);
+			color: white;
+		}
+		.food .slide .fa-shopping-cart{
+			left: 1rem;
+		}
+		.food .slide .fa-heart{
+			right: 1rem;
+		}
+		.food .slide:hover .fa-shopping-cart{
+			left: 1rem;
+		}
+		.food .slide:hover .fa-heart{
+			right: 1rem;
+		}
+
+
+		.food-preview-container{
+			background: var(--dark-bg);
+			position: fixed;
+			top: 0; left: 0;
+			height: 100%; width: 100%;
+			z-index: 1100; display: none;
+			align-items: center; justify-content: center;
+		}
+		.food-preview-container .food-preview{
+			text-align: center;
+			background: white;
+			padding: 3rem 2rem; width: 35rem;
+			border-radius: .5rem; display: none;
+		}
+		.food-preview-container .food-preview.active{
+			display: inline-block;
+			animation: fadeIn 0.4s cubic-bezier(.54, 1.3, .63, 1.34) .2s backwards;
+		}
+		.food-preview-container .food-preview img{
+			height: 25rem;
+			margin-bottom: 1rem;
+		}
+		.food-preview-container .food-preview h3{
+			padding: 1rem 0;
+			font-size: 2.5rem;
+			color: var(--black);
+		}
+		.food-preview-container .food-preview .stars{
+			margin-bottom: .5rem;
+		}
+		.food-preview-container .food-preview .stars i{
+			font-size: 1.7rem;
+			color: var(--favclr);
+		}
+		.food-preview-container .food-preview p{
+			font-size: 1.5rem;
+			color: var(--light-black);
+			padding: 1rem 0;
+			line-height: 2;
+		}
+		.food-preview-container .food-preview .price{
+			font-size: 2.5rem;
+			color: var(--black);
+			margin-bottom: .5rem;
+		}
+		#close-preview{
+			position: absolute;
+			top: 1.5rem; right: 2.5rem;
+			font-size: 6rem; cursor: pointer;
+			color: white;
+		}
+		#close-preview:hover{
+			transform: rotate(90deg);
+		}
+
+
+		.gallery .gallery-container{
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+			gap: 2rem;
+		}
+		.gallery .gallery-container .box{
+			height: 40rem;
+			position: relative;
+			overflow: hidden;
+		}
+		.gallery .gallery-container .box img{
+			height: 100%; width: 100%;
+			object-fit: cover;
+		}
+		.gallery .gallery-container .box .icon{
+			display: none; position: absolute;
+			align-items: center; top: 0; left: 0;
+			justify-content: center; z-index: 10;
+			height: 100%; width: 100%; 
+			background: var(--dark-bg);
+		}
+		.gallery .gallery-container .box .icon i{
+			font-size: 6rem;
+			color: white;
+		}
+		.gallery .gallery-container .box:hover .icon{
+			display: flex;
+		}
+
+
+		.menu{
+			background: var(--light-bg);
+		}
+		.menu .slide{
+			margin-bottom: 4rem;
+		}
+		.menu .slide .title{
+			padding: 1rem; color: white;
+			font-size: 3rem; background: var(--favclr);
+			margin-bottom: 3rem; text-align: center;
+		}
+		.menu .slide .box-container{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 2rem;
+		}
+		.menu .slide .box-container .box{
+			flex: 1 1 41rem; padding: 2rem;
+			background: white; box-shadow: var(--box-shadow); display: flex; gap: 1rem;
+			border: var(--border); justify-content: space-between; 
+		}
+		.menu .slide .box-container .box h3{
+			font-size: 2.5rem; padding-bottom: .5rem;
+			color: var(--black);
+		}
+		.menu .slide .box-container .box p{
+			font-size: 1.6rem; line-height: 2;
+			color: var(--light-black);
+		}
+		.menu .slide .box-container .box .price{
+			font-size: 2.5rem;
+			color: var(--favclr);
+		}
+		.menu .slide .box-container .box:hover{
+			transform: scale(.9);
+			cursor: pointer;
+		}
+
+		.swiper-button-next,
+		.swiper-button-prev{
+			height: 3rem; line-height: 3rem;
+			width: 3rem; background: var(--black);
+			color: white;
+		}
+		.swiper-button-next:hover,
+		.swiper-button-prev:hover{
+			background: var(--favclr);
+			color: white;
+		}
+		.swiper-button-next:after,
+		.swiper-button-prev:after{
+			font-size: 2rem;
+		}
+
+		.order{
+			background: var(--favclr);
+		}
+		.order .heading span{
+			color: white;
+		}
+		.order .heading h3{
+			color: white;
+		}
+		.order form{
+			padding: 2rem;
+			background: white;
+		}
+		.order form .box-container{
+			display: flex; gap: 2rem;
+			flex-wrap: wrap;
+		}
+		.order form .box-container .box{
+			flex: 1 1 41rem;
+		}
+		.order form .box-container .box .inputBox input,
+		.order form .box-container .box .inputBox textarea{
+			width: 100%; margin: 1rem 0; padding: 1.2rem 1.4rem; font-size: 1.7rem; color: var(--light-black);
+			border: var(--border); text-transform: none;
+
+		}
+		.order form .box-container .box .inputBox input::placeholder,
+		.order form .box-container .box .inputBox textarea::placeholder{
+			text-transform: capitalize;
+		}
+		.order form .box-container .box .inputBox input:focus,
+		.order form .box-container .box .inputBox textarea:focus{
+			background: var(--light-white);
+			color: white;
+		}
+		.order form .box-container .box .inputBox input:focus::placeholder,
+		.order form .box-container .box .inputBox textarea:focus::placeholder{
+			color: white;
+		}
+		.order form .box-container .box .inputBox textarea{
+			height: 20rem;
+			resize: none;
+		}
+		.order form .box-container .box .inputBox .map{
+			height: 20rem; margin: 1rem 0;
+			width: 100%; padding: .5rem 0;
+		}
+		.order form .box-container .box .inputBox span{
+			color: var(--black);
+			font-size: 2rem;
+		}
+		.order form .button{
+		background: #f9004d;
+		color: white;
+		text-decoration: none;
+		border: 2px solid transparent;
+		font-weight: bold;
+		padding: 13px 30px;
+		border-radius: 30px;
+		transition: .4s;
+		text-align: center;
+	}
+	.order form .button:hover{
+		background: var(--black);
+		border: 2px solid #f9004d;
+		cursor: pointer;
+	}
+
+
+	.blogs{
+		background: var(--light-bg);
+	}
+	.blogs .slide{
+		width: 35rem;
+	}
+	.blogs .slide .image{
+		height: 25rem; overflow: hidden; position: relative;
+	}
+	.blogs .slide .image img{
+		height: 100%; width: 100%; object-fit: cover;
+	}
+	.blogs .slide .image span{
+		position: absolute; bottom: -10rem; left: 50%;
+		transform: translateX(-50%);
+		padding: .5rem 1.5rem; font-size: 2rem;
+		color: white; background: var(--black);
+		z-index: 10;
+	}
+	.blogs .slide:hover .image span{
+		bottom: 1rem;
+	}
+	.blogs .slide:hover .image img{
+		transform: scale(1.1);
+	}
+	.blogs .slide .content{
+		padding: 2rem; background: white; 
+		box-shadow: var(--box-shadow); 
+		border: var(--border); margin-bottom: 4rem;
+	}
+	.blogs .slide .content .icon{
+		display: flex; align-items: center;
+		justify-content: space-between; 
+		margin-bottom: 1rem;
+	}
+	.blogs .slide .content .icon a{
+		font-size: 1.5rem; color: var(--light-black);
+	}
+	.blogs .slide .content .icon a i{
+		padding-right: .7rem; color: var(--favclr);
+	}
+	.blogs .slide .content .icon a:hover{
+		color: var(--favclr);
+	}
+	.blogs .slide .content .title{
+		font-size: 2.5rem; color: var(--black);
+	}
+	.blogs .slide .content .title:hover{
+		text-decoration: underline;
+	}
+	.blogs .slide .content p{
+		padding: 1rem 0; line-height: 2;
+		font-size: 1.6rem; color: var(--light-black);
+	}
+
+
+
+	.footer{
+		text-align: center;
+	}
+	.footer .icons-container{
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+		gap: 2rem;
+	}
+	.footer .icons-container .icons{
+		text-align: center; padding: 3rem 2rem;
+	}
+	.footer .icons-container .icons i{
+		height: 6rem; width: 6rem; border-radius: 50%;
+		background: var(--favclr); color: white;
+		margin-bottom: 1rem; line-height: 5.7rem;
+		font-size: 2rem;
+	}
+	.footer .icons-container .icons h3{
+		padding: 1rem 0; color: var(--black);
+		font-size: 2rem;
+	}
+	.footer .icons-container .icons p{
+		text-transform: none; color: var(--light-black);
+		font-size: 1.7rem; line-height: 1.5;
+	}
+	.footer .share{
+		margin: 2rem 0;
+	}
+	.footer .share a{
+		height: 6rem; width: 6rem; line-height: 5.8rem;
+		color: white; background: var(--black);
+		margin: 0 .3rem;
+		font-size: 2.5rem;
+	}
+	.footer .share a:hover{
+		background: var(--favclr);
+	}
+	.footer .credit{
+		padding-top: 2rem;
+		margin-top: 3rem;
+		border-top: var(--border);
+		font-size: 2rem;
+		color: var(--light-black);
+	}
+	.footer .credit span{
+		color: var(--favclr);
+	}
+	.footer .share h2{
+		padding: 1rem 0; color: var(--light-black);
+		font-size: 2rem;
+	}
+	.footer .share span{
+		color: var(--black);
+	}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*media Query*/
+
+	@media(max-width: 1200px){
+		section{
+			padding: 3rem 5%;
+		}
+	}
+	@media(max-width: 991px){
+		section{
+			padding: 3rem 2rem;
+		}
+		html{
+		font-size: 55%;
+		}
+	}
+	@media(max-width: 768px){
+
+		.header .icons #menu-bars{
+			display: inline-block;
+		}
+		.fa-times{
+			transform: rotate(180deg);
+		}
+		.header .navbar{
+			position: absolute;
+			top: 99%; left: 0; right: 0;
+			background-color: white;
+			border-top: var(--border);
+			clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		}
+		.header .navbar.active{
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		}
+		.header .navbar a{
+			display: block;
+			padding: 1.5rem;
+			margin: 1rem;
+			font-size: 2rem;
+			background: #eee;
+			width: 100%;
+		}
+		
+	}
+
+
+	</style>
+
+</head>
+<body>
+
+	<!-- header section starts -->
+
+	<section class="header">
+		
+		<a href="#" class="logo"><i class="fas fa-utensils"></i>NICE<span>Restaurant.</span></a>
+
+			<nav class="navbar">
+				<a href="#home" class="active">Home</a>
+				<a href="#about">About</a>
+				<a href="#food">food</a>
+				<a href="#gallery">gallery</a>
+				<a href="#menu">Menu</a>
+				<a href="#order">Order</a>
+				<a href="#blogs">blogs</a>
+			</nav>
+			<div class="icons">
+			<i class="fas fa-bars" id="menu-bars"></i>
+			<i class="fas fa-search" id="search-icon"></i>
+			<a href="#" class="fas fa-heart"></a>
+			<a href="#" class="fas fa-shopping-cart"></a>
+		</div>
+
+	<form action="" id="search-form">
+		<input type="search" placeholder="Search here..." id="search-box">
+		<label for="search-box" class="fas fa-search"></label>
+		<i class="fas fa-times" id="close"></i>
+	</form>
+
+	</section>
+		
+
+	<!-- header section Ends -->
+
+	<!-- home section starts -->
+
+	<section class="home" id="home">
+	   	<div class="swiper home-slide">
+	   		<div class="swiper-wrapper w">
+	   			<div class="swiper-slide slide" style="background: url(coffee-bread.jpg) no-repeat;">
+	   				<div class="content">
+	   					<span>Outstanding Menu</span>
+	   					<h3>Morning Moment</h3>
+	   					<a href="#" class="btn">Get Started</a>
+	   				</div>
+	   			</div>
+
+	   			<div class="swiper-slide slide" style="background: url(spicy-noodle.jpg) no-repeat;">
+	   				<div class="content">
+	   					<span>Outstanding Menu</span>
+	   					<h3>Delicious Cooking</h3>
+	   					<a href="#" class="btn">Get Started</a>
+	   				</div>
+	   			</div>
+
+	   			<div class="swiper-slide slide" style="background: url(kitchen.jpg) no-repeat;">
+	   				<div class="content">
+	   					<span>Outstanding Menu</span>
+	   					<h3>Authentic Kitchen</h3>
+	   					<a href="#" class="btn">Get Started</a>
+	   				</div>
+	   			</div>
+
+	   		</div>
+	   		<div class="swiper-pagination"></div>
+	   	</div>
+	   </section>
+
+	<!-- home section Ends -->
+
+
+		<!-- About section Starts -->
+
+
+		<section class="about" id="about">
+			<div class="image">
+				<img src="aboutbg.jpg">
+			</div>
+
+			<div class="content">
+				<h3 class="title">Welcome To Our Restaurant</h3>
+				<p>Food Is Everything We Are. It's An Extension of Nationalist Feeling, Ethnic feeling, Your Region, Your Tribe, Your Family. It's Inseparable From Those From The Get-Go.</p>
+				<a href="#" class="btn">Read More</a>
+				<div class="icons-container">
+					<div class="icons">
+						<img src="closed.png">
+						<h3>Quality Food</h3>
+					</div>
+					<div class="icons">
+						<img src="drinks.png">
+						<h3>Food & Drinks</h3>
+					</div>
+					<div class="icons">
+						<img src="chef.jpg">
+						<h3>Experts Chefs</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+
+			<!-- About section Ends -->
+
+			<!-- Food section Ends -->
+
+			<section class="food" id="food">
+				
+				<div class="heading">
+					<span>Popular Dishes</span>
+					<h3>Our Delicious Food</h3>
+				</div>
+				<div class="swiper food-slider">
+					
+					<div class="swiper-wrapper">
+						
+						<div class="swiper-slide slide" data-name="food-1">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="download.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+
+						<div class="swiper-slide slide" data-name="food-2">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="download__1.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-3">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images__1.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-4">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-5">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images__1.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-6">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images__2.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-7">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images1.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-8">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="friedChicken.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+						<div class="swiper-slide slide" data-name="food-9">
+							<a href="#" class="fas fa-heart"></a>
+							<a href="#" class="fas fa-shopping-cart"></a>
+							<img src="images__15.png">
+							<h3>Delicious Food</h3>
+							<div class="price">$49.99</div>
+						</div>
+
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+
+			</section>
+
+			<!-- Food section Ends -->
+
+			<!-- Food-preview section Starts -->
+
+			<section class="food-preview-container">
+				<div id="close-preview" class="fas fa-times"></div>
+
+				<div class="food-preview active" data-target="food-1">
+							<img src="download.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-2">
+							<img src="download__1.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-3">
+							<img src="images__1.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-4">
+							<img src="images.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-5">
+							<img src="images__1.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-6">
+							<img src="images__2.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-7">
+							<img src="images1.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+				<div class="food-preview" data-target="food-8">
+							<img src="friedChicken.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+
+				<div class="food-preview" data-target="food-9">
+							<img src="images__15.png">
+							<h3>Delicious Food</h3>
+							<div class="stars">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star-half-alt"></i>
+							</div>
+						<p>Pull Up a Chair.<br> Take a Taste. Come join Us.<br> Life Is So Endlessly delicious.</p>
+						<div class="price">$49.99</div>
+						<a href="#" class="btn">Buy Now</a>
+				</div>
+
+
+			</section>
+
+			<!-- Food-preview section Ends -->
+
+			<!-- gallery section Starts -->
+
+
+			<section class="gallery" id="gallery">
+				
+				<div class="heading">
+					<span>Our Gallery</span>
+					<h3>Our Untold Story</h3>
+				</div>
+				
+				 <div class="gallery-container">
+
+				 	<a href="images (2).jpg" class="box">
+				 		<img src="images (2).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (3).jpg" class="box">
+				 		<img src="images (3).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (4).jpg" class="box">
+				 		<img src="images (4).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (5).jpg" class="box">
+				 		<img src="images (5).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (15).jpg" class="box">
+				 		<img src="images (15).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (16).jpg" class="box">
+				 		<img src="images (16).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (17).jpg" class="box">
+				 		<img src="images (17).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (18).jpg" class="box">
+				 		<img src="images (18).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images.jpg" class="box">
+				 		<img src="images.jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (19).jpg" class="box">
+				 		<img src="images (19).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (20).jpg" class="box">
+				 		<img src="images (20).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 	<a href="images (21).jpg" class="box">
+				 		<img src="images (21).jpg">
+				 		<div class="icon"><i class="fas fa-plus"></i> </div>
+				 	</a>
+
+				 </div>
+
+
+			</section>
+
+			<!-- gallery section Ends -->
+
+			<section class="menu" id="menu">
+				
+				<div class="heading">
+					<span>Our Gallery</span>
+					<h3>Our Untold Story</h3>
+				</div>
+				
+				 <div class="swiper menu-slider">
+				 	<div class="swiper-wrapper">
+				 		<div class="swiper-slide slide">
+				 			<h3 class="title">BreakFast</h3>
+				 			<div class="box-container">
+
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Morning Breakfast</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+
+				 			</div>
+				 		</div>
+
+				 		<div class="swiper-slide slide">
+				 			<h3 class="title">Lunch</h3>
+				 			<div class="box-container">
+				 				
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Lunch</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Lunch</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Lunch</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Lunch</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 			</div>
+				 			</div>
+
+				 				<div class="swiper-slide slide">
+				 			<h3 class="title">Dinner</h3>
+				 			<div class="box-container">
+				 				
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Dinner</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Dinner</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Dinner</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Dinner</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Delicious Dinner</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+
+				 			</div>
+				 		</div>
+
+				 		<div class="swiper-slide slide">
+				 			<h3 class="title">Drinks</h3>
+				 			<div class="box-container">
+				 				
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Cold Drinks</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 			</div>
+				 		</div>
+ 
+				 		<div class="swiper-slide slide">
+				 			<h3 class="title">Desserts</h3>
+				 			<div class="box-container">
+				 				
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Sweet Desserts</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Sweet Desserts</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Sweet Desserts</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Sweet Desserts</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 				<div class="box">
+				 					<div class="info">
+				 						<h3>Sweet Desserts</h3>
+				 						<p>Life Begins After BreakFast</p>
+				 					</div>
+				 					<div class="price">$49.99</div>
+				 				</div>
+				 			</div>
+				 		</div>
+
+				 	</div>
+			<div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+			  </div>
+			</section>
+
+
+
+			<section class="order" id="order">
+				
+				<div class="heading">
+					<span>Order Now</span>
+					<h3>Fast Home Delivery</h3>
+				</div>
+				<form action="">
+					<div class="box-container">
+						<div class="box">
+							<div class="inputBox">
+								<span>Full Name</span>
+								<input type="text" placeholder="Enter Your Names" required="required">
+							</div>
+							<div class="inputBox">
+								<span>Food Name</span>
+								<input type="text" placeholder="Food You Want" required="required">
+							</div>
+							<div class="inputBox">
+								<span>Order Details</span>
+								<input type="text" placeholder="Specifics With Food" required="required">
+							</div>
+							<div class="inputBox">
+								<span>Your Address</span>
+								<textarea placeholder="Enter Your Address" id="" cols="30" rows="10" required="required"></textarea> 
+							</div>
+						</div>
+
+						<div class="box">
+							<div class="inputBox">
+								<span>Number</span>
+								<input type="number" placeholder="Enter Your Number" required="required">
+							</div>
+							<div class="inputBox">
+								<span>How Much</span>
+								<input type="number" placeholder="How Many You Want" required="required">
+							</div>
+							<div class="inputBox">
+								<span>When Do You Want?</span>
+								<input type="datetime-local" required="required">
+							</div>
+							<div class="inputBox">
+								<span>Our Address</span>
+								<iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31900.094230917686!2d30.031974515624995!3d-1.9483304999999949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca5a67d290d59%3A0x24c5b2739b5c8590!2sFusion%20Restaurant!5e0!3m2!1sen!2srw!4v1673949248517!5m2!1sen!2srw" allowfullscreen="" loading="lazy" required="required"></iframe>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="button">Order Now <i class="fas fa-paper-plane"></i></button>
+				</form>
+				</section>
+
+
+
+
+				<section class="blogs" id="blogs">
+					<div class="heading">
+	   					<span>Welcome To Our Blog</span>
+	   					<h3>Our Latest Posts</h3>
+	   				</div>
+
+	   	<div class="swiper blogs-slider">
+				 	<div class="swiper-wrapper">
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="burger.jpg">
+	   					<span>Burger</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="1.jpg">
+	   					<span>Chicken</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="2.jpg">
+	   					<span>Sandwich</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="3.jpg">
+	   					<span>Ice-Cream</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="4.jpg">
+	   					<span>Pizza</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="5.jpg">
+	   					<span>Coffee</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="6.jpg">
+	   					<span>Tea</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="7.jpg">
+	   					<span>Fruits</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   			
+
+	   			<div class="swiper-slide slide">
+	   				<div class="image">
+	   					<img src="8.jpg">
+	   					<span>Steak</span>
+	   				</div>
+	   				<div class="content">
+	   					<div class="icon">
+	   						<a href="#"><i class="fas fa-calendar"></i> 21st May, 2022 </a>
+	   						<a href="#"><i class="fas fa-user"></i> By Admin </a>
+	   					</div>
+	   					<a href="#" class="title">Blog Title Goes Here</a>
+	   					<p>Pull Up a Chair. Take a Taste. Come join Us. Life Is So Endlessly delicious.</p>
+	   					<a href="#" class="btn">Read More</a>
+	   				</div>
+	   			</div>
+
+	   		</div>
+	   		 <div class="swiper-pagination"></div>
+	   	</div>
+	   </section>
+
+
+
+
+	   <section class="footer">
+	   	
+	   	<div class="icons-container">
+	   		
+	   		<div class="icons">
+	   			<i class="fas fa-phone"></i>
+	   			<h3>Phone Call</h3>
+	   			<p>(+250) 780 000 000</p>
+	   			<p>(+250) 780 000 123</p>
+	   		</div>
+
+	   		<div class="icons">
+	   			<i class="fas fa-envelope"></i>
+	   			<h3>Email</h3>
+	   			<p>niceresto@gmail.com</p>
+	   			<p>nicereception@gmail.com</p>
+	   		</div>
+
+	   		<div class="icons">
+	   			<i class="fas fa-clock"></i>
+	   			<h3>Opening Hours</h3>
+	   			<p>07 : 00am to 10 : 00pm</p>
+	   		</div>
+
+	   		<div class="icons">
+	   			<i class="fas fa-map"></i>
+	   			<h3>Our Address</h3>
+	   			<p>Kigali, RWANDA - KK 123 K</p>
+	   		</div>
+
+	   	</div>
+	   			
+	   	<div class="share">
+	   		<h2>Our <span>Social Media</span> Platform</h2>
+	   		<a href="#" class="fab fa-facebook"></a>
+	   		<a href="#" class="fab fa-twitter"></a>
+	   		<a href="#" class="fab fa-instagram"></a>
+	   		<a href="#" class="fab fa-linkedin"></a>
+	   	</div>
+
+	   	<div class="credit">
+	   		Created by -<span> NOVA Designer </span>- | All Rights Reserved!
+	   	</div>
+
+	   </section>
+
+
+             <!-- for script file -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+             <script>
+             	
+    let navbar = document.querySelector('.header .navbar');
+    let menuBtn = document.querySelector('#menu-bars');
+
+    menuBtn.onclick = () =>{
+    	menuBtn.classList.toggle('fa-times');
+    	navbar.classList.toggle('active');
+    }
+    window.onscroll = () =>{
+    	menuBtn.classList.remove('fa-times');
+    	navbar.classList.remove('active');
+    }
+    document.querySelector('#search-icon').onclick = () =>{
+      document.querySelector('#search-form').classList.toggle('active');
+    }    
+    document.querySelector('#close').onclick = () =>{
+      document.querySelector('#search-form').classList.remove('active');
+    }   
+
+
+    var swiper = new Swiper(".home-slide", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        loop:true,
+      });
+
+      var swiper = new Swiper(".food-slider", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+          },
+          700: {
+            slidesPerView: 2,
+          },
+          1000: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+      let previewContainer = document.querySelector('.food-preview-container');
+      let previewBox = previewContainer.querySelectorAll('.food-preview');
+      document.querySelectorAll('.food .slide').forEach(food =>{
+      	food.onclick = () =>{
+      		previewContainer.style.display = 'flex';
+      		let name = food.getAttribute('data-name');
+      		previewBox.forEach(preveiw =>{
+      		let target = preveiw.getAttribute('data-target');
+      		if (name == target) {
+      			preveiw.classList.add('active');
+      		}
+      		});
+      	};
+      });
+
+      previewContainer.querySelector('#close-preview').onclick = () =>{
+       	previewContainer.style.display = 'none';
+       	previewBox.forEach(close =>{
+       		close.classList.remove('active');
+       	});
+       };
+
+
+       lightGallery(document.querySelector('.gallery .gallery-container'));
+
+       var swiper = new Swiper(".menu-slider", {
+        grabCursor:true,
+        loop:true,
+        pagination: {
+          el: ".swiper-pagination",
+          type: "progressbar",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+
+
+       var swiper = new Swiper(".blogs-slider", {
+        grabCursor:true,
+        loop:true,
+        centeredSlides: true,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+          },
+          700: {
+            slidesPerView: 2,
+          },
+          1000: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+
+             </script>
+
+<script type="text/javascript"></script>
+</body>
+</html>
